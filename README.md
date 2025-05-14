@@ -1,1 +1,1 @@
-# Gangba.n301
+# WGS.pipeline
