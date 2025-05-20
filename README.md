@@ -1,5 +1,4 @@
 # WGS.pipeline
-
 The main steps, software, and code/parameters used from off-machine data to the VCF file are described below. 
 
 #### (1) Quality control of raw reads
