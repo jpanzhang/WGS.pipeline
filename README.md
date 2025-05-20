@@ -1,3 +1,4 @@
+
 # WGS.pipeline
 The main steps, software, and code/parameters used from off-machine data to the VCF file are described below. 
 
