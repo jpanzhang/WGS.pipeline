@@ -1,6 +1,14 @@
+### _______________________________________________________________________________________________
+### The tool is sourced from the following paper, please cite it if appropriate. 
+#### Jipan Zhang, Di Zhou, Rong Yang, Zhengang Guo, Xingzhou Tian,Yongju Zhao. Whole-genome sequencing resources of 304 indigenous goats from the Karst region of Southwest China, Scientific Data, 2025, Under Review.
+### _______________________________________________________________________________________________
 
 # WGS.pipeline
 The main steps, software, and code/parameters used from off-machine data to the VCF file are described below. 
+
+
+
+
 
 #### (1) Quality control of raw reads
 #### Software: fastp v0.23.4
