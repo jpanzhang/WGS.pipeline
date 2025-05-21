@@ -13,7 +13,7 @@ The main steps, software, and code/parameters used from off-machine data to the 
 
 #### (2) Mapping reads and sorting the BAM file
 - Software: Sentieon v202308
-- Code: Sentieon_install_dir/bin/sentieon bwa mem -R "@RG\tID:rg_sample\tSM:sample\tPL:$PL" -t 40 -K 10000000 sheep.genome. fa sample.R1.clean.fq sample.R2.clean.fq | util sort -t 40 --sam2bam -o sample.sorted.bam -i -
+- Code: Sentieon_install_dir/bin/sentieon bwa mem -R "@RG\tID:rg_sample\tSM:sample\tPL:$PL" -t 40 -K 10000000 goat.genome.fa sample.R1.clean.fq sample.R2.clean.fq | util sort -t 40 --sam2bam -o sample.sorted.bam -i -
 
 #### (3) Mark Duplicates
 - Software: Sentieon v202308
@@ -23,7 +23,7 @@ Sentieon_install_dir/bin/sentieon driver -t 40 -i sample-sorted.bam --algo Dedup
 #### (4) Sequencing accuracy assessment and alignment statistics (optional)
 - Software: Sentieon v202308, PanDepth v2.25, and Samtools v1.13
 - Code for calculating reads quality: 
-Sentieon_install_dir/bin/sentieon driver -r sheep.genome.fa -t 40 -i sample-sorted.bam \
+Sentieon_install_dir/bin/sentieon driver -r goat.genome.fa -t 40 -i sample-sorted.bam \
 --algo MeanQualityByCycle sample.mq_metrics.txt \
 --algo QualDistribution sample.qd_metrics.txt \
 --algo GCBias --summary sample.gc_summary.txt sample.gc_metrics.txt \
@@ -38,21 +38,21 @@ Samtools_install_dir/Samtools flagstat -@40 -i sample.deduped.bam > sample.mappe
 
 #### (5) Variants calling for each sample
 - Software: Sentieon v202308
-- Code: Sentieon_install_dir/bin/sentieon driver -r sheep.genome.fa -t 40 -i sample.deduped.bam --algo Haplotyper --emit_conf=30 --call_conf=30 --emit_mode gvcf sample.gvcf.vcf.gz 
+- Code: Sentieon_install_dir/bin/sentieon driver -r goat.genome.fa -t 40 -i sample.deduped.bam --algo Haplotyper --emit_conf=30 --call_conf=30 --emit_mode gvcf sample.gvcf.vcf.gz 
 
 #### (6) Variant joint calling for all samples
 - Software: Sentieon v202308
 - Code: GVCF_list=gvcf.gz.list.txt #paths to all gVCF files
 GVCF_inputs=$(awk '{info=info" -v "$0} END {print info}' $GVCF_list) 
-Sentieon_install_dir/bin/sentieon driver -t 40 -r sheep.genome.fa --algo GVCFtyper $GVCF_inputs joint-calling.vcf 
+Sentieon_install_dir/bin/sentieon driver -t 40 -r goat.genome.fa --algo GVCFtyper $GVCF_inputs joint-calling.vcf 
 
 #### (7) Variants extraction and hard filtration
 - Software: GATK v4.1.8.1
 - Code for SNPs: 
-GATK_install_dir/gatk SelectVariants -R sheep.fa -V joint-calling.vcf -O filtered.SNP.vcf \
+GATK_install_dir/gatk SelectVariants -R goat.genome.fa -V joint-calling.vcf -O filtered.SNP.vcf \
 -select '((QD>=2.0 && MQ>=40.0 && FS<=60.0 && SOR<=3.0) && (QD>=2.0 && MQ<40.0 && FS<=60.0 && SOR<=3.0 || MQRankSum>=-12.5 && ReadPosRankSum>=-8.0) && vc.isSNP())'
 - Code for InDels: 
-GATK_install_dir/gatk SelectVariants -R sheep.fa -V joint-calling.vcf -O filtered.InDel.vcf \
+GATK_install_dir/gatk SelectVariants -R goat.genome.fa -V joint-calling.vcf -O filtered.InDel.vcf \
 -select '((QD>=2.0 && FS<=200.0 && SOR<=10.0) && (QD>=2.0 && FS<=200.0 && SOR<=10.0 || ReadPosRankSum>=-20.0) && vc.isIndel())'
 
 #### (8) Further filtration
