@@ -1,7 +1,7 @@
-### The tool is sourced from the following paper, please cite it if appropriate. 
-#### Whole-genome sequencing resources of 304 indigenous goats from the Karst region of Southwest China
-#### Journal: Scientific Data, 2025, Under Review.
-#### Authors: Jipan Zhang, Di Zhou, Rong Yang, Zhengang Guo, Xingzhou Tian, Yongju Zhao 
+## The tool is sourced from the following paper, please cite it if appropriate. 
+- Whole-genome sequencing resources of 304 indigenous goats from the Karst region of Southwest China
+- Journal: Scientific Data, 2025, Under Review.
+- Authors: Jipan Zhang, Di Zhou, Rong Yang, Zhengang Guo, Xingzhou Tian, Yongju Zhao 
 ### _______________________________________________________________________________________________
 
 # WGS.pipeline
