@@ -1,6 +1,6 @@
 ## The pipline is sourced from the following paper, please cite it if appropriate. 
 - Whole-genome sequencing and variants data of 304 indigenous goats from Southwest China
-- Journal: Scientific Data, 2025, Under Review.
+- Journal: Scientific Data, 2025.
 - Authors: Jipan Zhang, Di Zhou, Rong Yang, Zhengang Guo, Xingzhou Tian, Yongju Zhao 
 ### _______________________________________________________________________________________________
 
